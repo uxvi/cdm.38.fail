@@ -224,6 +224,13 @@
       letter-spacing: -0.03em;
     }
 
+    .goal-description {
+      margin: 10px 0 0;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
     .goal-date {
       margin-top: 10px;
       font-size: 0.96rem;
@@ -630,6 +637,7 @@
     const goals = [
       {
         title: "Fill 70% of Montefiore's trench interior with builds",
+        description: null,
         status: "in-progress",
         date: null,
         note: null,
@@ -639,6 +647,7 @@
       },
       {
         title: "Draft and pass a Montefiore City Act",
+        description: null,
         status: "in-progress",
         date: null,
         note: null,
@@ -649,7 +658,8 @@
       },
       {
         title: "Encourage the private sector",
-        status: "ongoing",
+        description: null,
+        status: "in-progress",
         date: null,
         note: null,
         subtrackers: [
@@ -660,6 +670,7 @@
       },
       {
         title: "Invite Cortesia's neighbors to benefit from Montefiore as a regional economic center",
+        description: null,
         status: "planned",
         date: null,
         note: "No concrete objectives yet established. This space will be updated when concrete objectives are announced for this goal.",
@@ -667,6 +678,7 @@
       },
       {
         title: "Establish an incentives package for large companies to open shops in Montefiore",
+        description: null,
         status: "planned",
         date: null,
         note: null,
@@ -674,6 +686,7 @@
       },
       {
         title: "Host a public ceremony in Montefiore on May 31, 2026",
+        description: null,
         status: "scheduled",
         date: "May 31, 2026",
         note: null,
@@ -681,17 +694,19 @@
       },
       {
         title: "Cover the entire surface of Santiago & Castelia in jukebox snitches",
+        description: null,
         status: "in-progress",
         date: null,
         note: null,
         subtrackers: [
-          { type: "progress", label: "Santiago", starting: 0,current: 0, target: 100 },
+          { type: "progress", label: "Santiago", starting: 0, current: 0, target: 100 },
           { type: "progress", label: "Castelia", starting: 0, current: 0, target: 100 }
         ]
       },
       {
         title: "Construct bastioned city bunkers in Santiago & Castelia",
-        status: "ongoing",
+        description: null,
+        status: "in-progress",
         date: null,
         note: null,
         subtrackers: [
@@ -701,7 +716,8 @@
       },
       {
         title: "Establish iron/diamond and ore exchanges in Santiago",
-        status: "ongoing",
+        description: null,
+        status: "in-progress",
         date: null,
         note: null,
         subtrackers: [
@@ -711,6 +727,7 @@
       },
       {
         title: "Connect Santiago to the GOR",
+        description: null,
         status: "planned",
         date: null,
         note: null,
@@ -718,7 +735,8 @@
       },
       {
         title: "Construct rail stations in Aldenfult",
-        status: "ongoing",
+        description: null,
+        status: "in-progress",
         date: null,
         note: null,
         subtrackers: [
@@ -728,6 +746,7 @@
       },
       {
         title: "Montefiore-Dubrovnik rail connection",
+        description: null,
         status: "planned",
         date: null,
         note: null,
@@ -735,6 +754,7 @@
       },
       {
         title: "Scatter small military kite points across CDM",
+        description: null,
         status: "in-progress",
         date: null,
         note: null,
@@ -745,6 +765,7 @@
       },
       {
         title: "Develop the Deep Blue snitch system",
+        description: null,
         status: "planned",
         date: null,
         note: null,
@@ -752,6 +773,7 @@
       },
       {
         title: "Put an XP plan on the National Forum floor",
+        description: null,
         status: "planned",
         date: null,
         note: null,
@@ -759,6 +781,7 @@
       },
       {
         title: '"Pocket" versions of all law and precedents',
+        description: null,
         status: "completed",
         date: null,
         note: null,
@@ -795,9 +818,8 @@
       let goalCount = 0;
 
       goals.forEach(g => {
-        goalCount ++;
+        goalCount++;
 
-        // A goal is "complete" if all its subtrackers are done/100%
         let goalComplete = false;
         if (g.subtrackers.length === 0) {
           goalComplete = (g.status === "completed");
@@ -811,13 +833,12 @@
         }
         if (goalComplete) completedGoals++;
 
-        // Aggregate progress
         if (g.subtrackers.length > 0) {
           let subCount = 0;
           let totalSubProgress = 0;
           g.subtrackers.forEach(s => {
             if (s.type === "progress") {
-              totalSubProgress += Math.min((s.current-s.starting) / (s.target-s.starting), 1) * 100;
+              totalSubProgress += Math.min((s.current - s.starting) / (s.target - s.starting), 1) * 100;
               subCount++;
             } else if (s.type === "check") {
               totalSubProgress += s.done ? 100 : 0;
@@ -837,7 +858,6 @@
       document.getElementById("stat-completed").textContent = completedGoals + "/" + total;
     }
 
-    // Rendering
     function render() {
       const container = document.getElementById("goals-container");
       container.innerHTML = "";
@@ -859,9 +879,9 @@
                 <div class="subtracker-name">${escHtml(s.label)}</div>
               </div>
               <div class="progress-wrap">
-              ${s.starting > 0 
-              ? `<div class="progress-top"><span>${s.starting}% initial</span><span>${s.target}% target</span></div>` 
-              : `<div class="progress-top"><span></span><span>${s.target}% target</span></div>`}
+              ${s.starting > 0
+                  ? `<div class="progress-top"><span>${s.starting}% initial</span><span>${s.target}% target</span></div>`
+                  : `<div class="progress-top"><span></span><span>${s.target}% target</span></div>`}
                 <div class="progress-bar-row">
                   <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
                   <div class="progress-current">${s.current}%</div>
@@ -941,6 +961,10 @@
               <input class="edit-input" value="${escAttr(goal.title)}" oninput="updateGoal(${gi},'title',this.value)" />
             </div>
             <div class="edit-row">
+              <span class="edit-label">Description</span>
+              <textarea class="edit-textarea" oninput="updateGoal(${gi},'description',this.value||null)">${escHtml(goal.description || '')}</textarea>
+            </div>
+            <div class="edit-row">
               <span class="edit-label">Status</span>
               <select class="edit-select" onchange="updateGoal(${gi},'status',this.value)">
                 ${STATUS_OPTIONS.map(o => `<option value="${o.value}"${goal.status === o.value ? " selected" : ""}>${o.label}</option>`).join("")}
@@ -968,6 +992,7 @@
             <div class="badge ${goal.status}">${STATUS_LABELS[goal.status] || goal.status}</div>
           </div>
           <h2 class="goal-title">${escHtml(goal.title)}</h2>
+          ${goal.description ? `<p class="goal-description">${escHtml(goal.description)}</p>` : ""}
           ${goal.date ? `<div class="goal-date">Target date: ${escHtml(goal.date)}</div>` : ""}
           ${goal.note ? `<div class="note">${escHtml(goal.note)}</div>` : ""}
         </div>
@@ -995,35 +1020,60 @@
       const card = document.getElementById("goals-container").children[gi];
       const num = String(gi + 1).padStart(2, "0");
       const g = goals[gi];
+      const heading = card.querySelector(".goal-heading");
+
       card.querySelector(".goal-number").textContent = num;
       card.querySelector(".badge").className = `badge ${g.status}`;
       card.querySelector(".badge").textContent = STATUS_LABELS[g.status] || g.status;
       card.querySelector(".goal-title").textContent = g.title;
 
-      // date
+      let descEl = card.querySelector(".goal-description");
+      if (g.description) {
+        if (!descEl) {
+          descEl = document.createElement("p");
+          descEl.className = "goal-description";
+          card.querySelector(".goal-title").insertAdjacentElement("afterend", descEl);
+        }
+        descEl.textContent = g.description;
+      } else if (descEl) {
+        descEl.remove();
+      }
+
       let dateEl = card.querySelector(".goal-date");
       if (g.date) {
-        if (!dateEl) { dateEl = document.createElement("div"); dateEl.className = "goal-date"; card.querySelector(".goal-heading").appendChild(dateEl); }
+        if (!dateEl) {
+          dateEl = document.createElement("div");
+          dateEl.className = "goal-date";
+          heading.appendChild(dateEl);
+        }
         dateEl.textContent = "Target date: " + g.date;
-      } else if (dateEl) dateEl.remove();
+      } else if (dateEl) {
+        dateEl.remove();
+      }
 
-      // note
       let noteEl = card.querySelector(".note");
       if (g.note) {
-        if (!noteEl) { noteEl = document.createElement("div"); noteEl.className = "note"; card.querySelector(".goal-heading").appendChild(noteEl); }
+        if (!noteEl) {
+          noteEl = document.createElement("div");
+          noteEl.className = "note";
+          heading.appendChild(noteEl);
+        }
         noteEl.textContent = g.note;
-      } else if (noteEl) noteEl.remove();
+      } else if (noteEl) {
+        noteEl.remove();
+      }
     }
 
     function updateSub(gi, si, key, value) {
       goals[gi].subtrackers[si][key] = value;
       if (key === "type") {
         if (value === "progress") {
-          goals[gi].subtrackers[si] = { type: "progress", label: goals[gi].subtrackers[si].label, current: 0, target: 100 };
+          goals[gi].subtrackers[si] = { type: "progress", label: goals[gi].subtrackers[si].label, starting: 0, current: 0, target: 100 };
         } else {
           goals[gi].subtrackers[si] = { type: "check", label: goals[gi].subtrackers[si].label, done: false };
         }
-        render(); return;
+        render();
+        return;
       }
       computeStats();
       refreshSubtrackersView(gi);
@@ -1056,7 +1106,9 @@
           html += `<div class="subtracker">
         <div class="subtracker-meta"><div class="subtracker-label">Sub-tracker</div><div class="subtracker-name">${escHtml(s.label)}</div></div>
         <div class="progress-wrap">
-          <div class="progress-top"><span>${s.starting}%</span><span>${s.target}% target</span></div>
+          ${s.starting > 0
+              ? `<div class="progress-top"><span>${s.starting}% initial</span><span>${s.target}% target</span></div>`
+              : `<div class="progress-top"><span></span><span>${s.target}% target</span></div>`}
           <div class="progress-bar-row"><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div><div class="progress-current">${s.current}%</div></div>
         </div></div>`;
         } else {
@@ -1073,18 +1125,17 @@
         const wrap = document.createElement("div");
         wrap.className = "subtrackers";
         wrap.innerHTML = html;
-        // Insert before edit-controls
         const editCtrl = card.querySelector(".edit-controls");
         if (editCtrl) card.insertBefore(wrap, editCtrl);
         else card.appendChild(wrap);
       }
     }
 
-    // Util
     function escHtml(str) {
       if (!str) return "";
       return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     }
+
     function escAttr(str) {
       if (!str) return "";
       return String(str).replace(/"/g, "&quot;").replace(/'/g, "&#39;");

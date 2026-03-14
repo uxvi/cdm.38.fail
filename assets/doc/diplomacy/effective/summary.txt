@@ -1,0 +1,16 @@
+Diplomatic agreements which are presently enforced.
+
+Icenian State Agreement
+Agreement which establishes the terms of Cortesia Del Mar's relationship with the Republic of Icenia.
+
+CDM-TE Partnership Treaty
+Treaty cementing non-aggression and establishing anti-raider cooperation between Cortesia Del Mar and the Temporal Empire.
+
+CDM-Ruby Non-Aggression Pact
+Treaty cementing terms of continued non-aggression between Cortesia Del Mar and Ruby.
+
+CDM-Danzilona Non-Aggression Pact
+Treaty cementing terms of continued non-aggression between Cortesia Del Mar and Danzilona.
+
+CDM-Neo Sol Non-Aggression Pact
+Treaty cementing terms of continued non-aggression between Cortesia Del Mar and Danzilona.

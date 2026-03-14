@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Archive of Cortesia Del Mar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1><a href="#">National Archive of Cortesia Del Mar</a></h1>
+            <p id="tagline">Official Repository of Laws, Rulings, and Treaties</p>
+        </header>
+        
+        <div id="main-layout">
+            <nav id="sidebar">
+                <div class="nav-section">
+                    <h2>Categories</h2>
+                    <ul id="category-list">
+                        <!-- Populated by app.js -->
+                    </ul>
+                </div>
+                <div class="nav-section" id="context-nav-section" style="display: none;">
+                    <h2 id="context-nav-title">Documents</h2>
+                    <ul id="document-list">
+                        <!-- Populated by app.js -->
+                    </ul>
+                </div>
+            </nav>
+            
+            <main id="content">
+                <div id="view-index">
+                    <h2>The Cortesian Archive</h2>
+                    <p>Welcome to the National Archive of Cortesia Del Mar. Established to preserve the integrity and history of the nation's very essence: <strong>paperwork</strong>.</p>
+                    <p>If you have information or questions regarding the archive, please contact us.</p>
+                    <div class="info-section">
+                        <h3>Contact Information</h3>
+                        <p><strong>Email: </strong><i>cdm@mail.38.fail</i></p>
+                        <p><strong>Discord: </strong><i>@uxvi</i></p>
+                    </div>
+                </div>
+                
+                <div id="view-category" style="display: none;">
+                    <h2 id="category-title">Category Name</h2>
+                    <div id="category-content">
+                        <!-- Populated by app.js -->
+                    </div>
+                </div>
+                
+                <div id="view-document" style="display: none;">
+                    <div class="doc-header">
+                        <h2 id="doc-title">Document Title</h2>
+                        <p id="doc-meta">Category • Year</p>
+                    </div>
+                    <div class="doc-summary-box">
+                        <h3>Official Summary</h3>
+                        <p id="doc-summary"></p>
+                    </div>
+                    <div class="doc-actions">
+                        <button id="btn-view-md">View Document</button>
+                        <button id="btn-view-case-text" style="display: none;">View Case Text</button>
+                        <button id="btn-view-pdf">View PDF</button>
+                        <button id="btn-download" class="btn-accent">Download File</button>
+                    </div>
+                    <div id="doc-viewer-container">
+                        <div id="md-viewer" style="display: none;"></div>
+                        <iframe id="pdf-viewer" style="display: none;" frameborder="0"></iframe>
+                        <div id="no-viewer-msg" style="display: none;">
+                            <p>No viewer available for this file type. Please download the file to view.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <footer>
+            <p>&copy; 2026 Republic of Cortesia Del Mar • oko.moe</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
