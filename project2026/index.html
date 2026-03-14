@@ -45,7 +45,6 @@
       color: var(--text);
       background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
     }
-
     .page {
       max-width: 1200px;
       margin: 0 auto;
@@ -571,7 +570,6 @@
       .page {
         padding: 22px 14px 40px;
       }
-
       .hero,
       .goal-card {
         padding: 20px;
@@ -602,6 +600,14 @@
 </head>
 
 <body>
+  <script src="../assets/js/gov-banner.js"></script>
+  <script>
+    insertGovBanner({
+      maxWidth: "1200px",
+      summaryPadding: "4px 24px",
+      panelPadding: "18px 24px"
+    });
+  </script>
   <div class="page">
     <header class="hero">
       <div class="hero-grid">
@@ -1146,3 +1152,5 @@
 </body>
 
 </html>
+
+
