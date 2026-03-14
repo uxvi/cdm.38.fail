@@ -8,7 +8,7 @@
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <style>
     :root {
-      --bg-top: #f8fafd;
+      --bg-top: #f8fafc;
       --bg-mid: #eef4ff;
       --bg-bottom: #ffffff;
       --text: #030122;
@@ -25,8 +25,8 @@
       --slate-text: #475569;
       --amber-bg: #fef3c7;
       --amber-text: #b45309;
-      --green-bg: #dcfce7;
-      --green-text: #15803d;
+      --green-bg: #15803d;
+      --white-text: #ffffff;
       --bar-bg: #e2e8f0;
       --bar-fill: #8bcfff;
     }
@@ -257,14 +257,14 @@
       color: var(--slate-text);
     }
 
-    .badge.planning {
+    .badge.scheduled {
       background: var(--amber-bg);
       color: var(--amber-text);
     }
 
-    .badge.scheduled {
+    .badge.completed {
       background: var(--green-bg);
-      color: var(--green-text);
+      color: var(--white-text);
     }
 
     .note {
@@ -325,14 +325,31 @@
       margin-bottom: 7px;
       font-size: 0.8rem;
       color: var(--muted);
+      padding-right: 56px;
     }
 
     .progress-bar {
       width: 100%;
+      flex: 1;
       height: 11px;
       overflow: hidden;
       border-radius: 999px;
       background: var(--bar-bg);
+    }
+
+    .progress-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-current {
+      min-width: 46px;
+      text-align: right;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 600;
+      flex-shrink: 0;
     }
 
     .progress-fill {
@@ -617,7 +634,7 @@
         date: null,
         note: null,
         subtrackers: [
-          { type: "progress", label: "Build coverage", current: 40, target: 70 }
+          { type: "progress", label: "Build coverage", starting: 40, current: 45, target: 70 }
         ]
       },
       {
@@ -626,7 +643,7 @@
         date: null,
         note: null,
         subtrackers: [
-          { type: "check", label: "Final draft completed", done: true },
+          { type: "check", label: "Final draft completed", done: false },
           { type: "check", label: "Passed National Forum", done: false }
         ]
       },
@@ -643,7 +660,7 @@
       },
       {
         title: "Invite Cortesia's neighbors to benefit from Montefiore as a regional economic center",
-        status: "planning",
+        status: "planned",
         date: null,
         note: "No concrete objectives yet established. This space will be updated when concrete objectives are announced for this goal.",
         subtrackers: []
@@ -668,8 +685,8 @@
         date: null,
         note: null,
         subtrackers: [
-          { type: "progress", label: "Santiago", current: 0, target: 100 },
-          { type: "progress", label: "Castelia", current: 0, target: 100 }
+          { type: "progress", label: "Santiago", starting: 0,current: 0, target: 100 },
+          { type: "progress", label: "Castelia", starting: 0, current: 0, target: 100 }
         ]
       },
       {
@@ -705,7 +722,7 @@
         date: null,
         note: null,
         subtrackers: [
-          { type: "check", label: "Overland", done: false },
+          { type: "check", label: "Overland", done: true },
           { type: "check", label: "Underground", done: false }
         ]
       },
@@ -722,8 +739,8 @@
         date: null,
         note: null,
         subtrackers: [
-          { type: "progress", label: "Arsenio", current: 0, target: 100 },
-          { type: "progress", label: "Iaumea", current: 0, target: 100 }
+          { type: "progress", label: "Arsenio", starting: 0, current: 10, target: 100 },
+          { type: "progress", label: "Iaumea", starting: 0, current: 0, target: 100 }
         ]
       },
       {
@@ -742,13 +759,13 @@
       },
       {
         title: '"Pocket" versions of all law and precedents',
-        status: "in-progress",
+        status: "completed",
         date: null,
         note: null,
         subtrackers: [
-          { type: "check", label: "Constitution", done: false },
-          { type: "progress", label: "Laws", current: 0, target: 100 },
-          { type: "progress", label: "Court precedents", current: 0, target: 100 }
+          { type: "check", label: "Constitution", done: true },
+          { type: "progress", label: "Laws", starting: 0, current: 100, target: 100 },
+          { type: "progress", label: "Court precedents", starting: 0, current: 100, target: 100 }
         ]
       }
     ];
@@ -757,16 +774,16 @@
       { value: "in-progress", label: "In Progress" },
       { value: "ongoing", label: "Ongoing" },
       { value: "planned", label: "Planned" },
-      { value: "planning", label: "Planning" },
-      { value: "scheduled", label: "Scheduled" }
+      { value: "scheduled", label: "Scheduled" },
+      { value: "completed", label: "Completed" }
     ];
 
     const STATUS_LABELS = {
       "in-progress": "In progress",
       "ongoing": "Ongoing",
       "planned": "Planned",
-      "planning": "Planning",
-      "scheduled": "Scheduled"
+      "scheduled": "Scheduled",
+      "completed": "Completed"
     };
 
     let editMode = false;
@@ -774,14 +791,16 @@
     function computeStats() {
       const total = goals.length;
       let completedGoals = 0;
-      let totalSubProgress = 0;
-      let subCount = 0;
+      let totalGoalProgress = 0;
+      let goalCount = 0;
 
       goals.forEach(g => {
+        goalCount ++;
+
         // A goal is "complete" if all its subtrackers are done/100%
         let goalComplete = false;
         if (g.subtrackers.length === 0) {
-          goalComplete = (g.status === "scheduled" || g.status === "planned") ? false : false;
+          goalComplete = (g.status === "completed");
         } else {
           const allDone = g.subtrackers.every(s => {
             if (s.type === "check") return s.done;
@@ -793,18 +812,25 @@
         if (goalComplete) completedGoals++;
 
         // Aggregate progress
-        g.subtrackers.forEach(s => {
-          if (s.type === "progress") {
-            totalSubProgress += Math.min(s.current / s.target, 1) * 100;
-            subCount++;
-          } else if (s.type === "check") {
-            totalSubProgress += s.done ? 100 : 0;
-            subCount++;
-          }
-        });
+        if (g.subtrackers.length > 0) {
+          let subCount = 0;
+          let totalSubProgress = 0;
+          g.subtrackers.forEach(s => {
+            if (s.type === "progress") {
+              totalSubProgress += Math.min((s.current-s.starting) / (s.target-s.starting), 1) * 100;
+              subCount++;
+            } else if (s.type === "check") {
+              totalSubProgress += s.done ? 100 : 0;
+              subCount++;
+            }
+          });
+          totalGoalProgress += (totalSubProgress / subCount);
+        } else {
+          totalGoalProgress += (goalComplete ? 100 : 0);
+        }
       });
 
-      const overallProgress = subCount > 0 ? Math.round(totalSubProgress / subCount) : 0;
+      const overallProgress = goalCount > 0 ? Math.round(totalGoalProgress / goalCount) : 0;
 
       document.getElementById("stat-total").textContent = total;
       document.getElementById("stat-progress").textContent = overallProgress + "%";
@@ -825,7 +851,7 @@
           subtrackerHTML = '<div class="subtrackers">';
           goal.subtrackers.forEach(s => {
             if (s.type === "progress") {
-              const pct = s.target > 0 ? Math.min((s.current / s.target) * 100, 100).toFixed(2) : 0;
+              const pct = s.target > s.starting ? Math.min((s.current - s.starting) / (s.target - s.starting), 1) * 100 : 0;
               subtrackerHTML += `
             <div class="subtracker">
               <div class="subtracker-meta">
@@ -833,8 +859,13 @@
                 <div class="subtracker-name">${escHtml(s.label)}</div>
               </div>
               <div class="progress-wrap">
-                <div class="progress-top"><span>${s.current}%</span><span>${s.target}% target</span></div>
-                <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+              ${s.starting > 0 
+              ? `<div class="progress-top"><span>${s.starting}% initial</span><span>${s.target}% target</span></div>` 
+              : `<div class="progress-top"><span></span><span>${s.target}% target</span></div>`}
+                <div class="progress-bar-row">
+                  <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+                  <div class="progress-current">${s.current}%</div>
+                </div>
               </div>
             </div>`;
             } else {
@@ -874,7 +905,7 @@
               <div class="sub-edit-row">
                 <span class="edit-label">Current</span>
                 <div class="progress-edit-wrap">
-                  <input type="range" min="0" max="${s.target}" value="${s.current}" oninput="updateSub(${gi},${si},'current',+this.value);this.nextElementSibling.textContent=this.value+'%'" />
+                  <input type="range" min="${s.starting}" max="${s.target}" value="${s.current}" oninput="updateSub(${gi},${si},'current',+this.value);this.nextElementSibling.textContent=this.value+'%'" />
                   <span>${s.current}%</span>
                 </div>
                 <span class="edit-label" style="min-width:50px">Target</span>
@@ -1021,12 +1052,12 @@
       let html = "";
       g.subtrackers.forEach(s => {
         if (s.type === "progress") {
-          const pct = s.target > 0 ? Math.min((s.current / s.target) * 100, 100).toFixed(2) : 0;
+          const pct = s.target > s.starting ? Math.min((s.current - s.starting) / (s.target - s.starting), 1) * 100 : 0;
           html += `<div class="subtracker">
         <div class="subtracker-meta"><div class="subtracker-label">Sub-tracker</div><div class="subtracker-name">${escHtml(s.label)}</div></div>
         <div class="progress-wrap">
-          <div class="progress-top"><span>${s.current}%</span><span>${s.target}% target</span></div>
-          <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+          <div class="progress-top"><span>${s.starting}%</span><span>${s.target}% target</span></div>
+          <div class="progress-bar-row"><div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div><div class="progress-current">${s.current}%</div></div>
         </div></div>`;
         } else {
           html += `<div class="subtracker">
