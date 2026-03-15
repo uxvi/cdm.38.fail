@@ -45,6 +45,7 @@
       color: var(--text);
       background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
     }
+
     .page {
       max-width: 1200px;
       margin: 0 auto;
@@ -570,6 +571,7 @@
       .page {
         padding: 22px 14px 40px;
       }
+
       .hero,
       .goal-card {
         padding: 20px;
@@ -600,14 +602,6 @@
 </head>
 
 <body>
-  <script src="../assets/js/gov-banner.js"></script>
-  <script>
-    insertGovBanner({
-      maxWidth: "1200px",
-      summaryPadding: "4px 24px",
-      panelPadding: "18px 24px"
-    });
-  </script>
   <div class="page">
     <header class="hero">
       <div class="hero-grid">
@@ -717,7 +711,7 @@
         note: null,
         subtrackers: [
           { type: "check", label: "Santiago", done: false },
-          { type: "check", label: "Castelia", done: false }
+          { type: "check", label: "Castelia", done: true }
         ]
       },
       {
@@ -772,7 +766,7 @@
       {
         title: "Develop the Deep Blue snitch system",
         description: "'Deep Blue' is a proposed snitchbot that would give Cortesia the capacity to host and configure complex snitch relays independently of any international provider",
-        status: "planned",
+        status: "completed",
         date: null,
         note: null,
         subtrackers: []
@@ -1152,5 +1146,3 @@
 </body>
 
 </html>
-
-
