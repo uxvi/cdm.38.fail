@@ -215,6 +215,12 @@ const ARCHIVE_DATA = [
         title: "Exclusions Act",
         summary: "Bill defining land bans and exclusion zones in terms of law.",
         files: { pdf: "../assets/doc/laws/2026/exclusions-act.pdf" }
+      },
+      {
+        year: "2026",
+        title: "Property Title Act",
+        summary: "Bill which provides rules and regulations for ownership and transfer of real property.",
+        files: { pdf: "../assets/doc/laws/2026/property-title-act.pdf" }
       }
     ]
   },
