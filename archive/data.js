@@ -352,5 +352,17 @@ const ARCHIVE_DATA = [
         files: { pdf: "../assets/doc/rulings/2025/ex-parte-icecarim.pdf" }
       }
     ]
+  },
+  {
+    category: "Executive Policies",
+    id: "execpol",
+    items: [
+      {
+        year: "2026",
+        title: "Labor Notes Policy & Procedures",
+        summary: "Treasury policy document establishing the Labor Notes system.",
+        files: { markdown: "../assets/doc/execpol/2026/labor-notes.pdf" }
+      }
+    ]
   }
 ];
