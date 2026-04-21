@@ -63,6 +63,16 @@ const ARCHIVE_DATA = [
             title: "Second Treaty of Santiago",
             summary: "Treaty which effected the incorporation of Sibenica (Iaumea) into Cortesia Del Mar.",
             files: { pdf: "../assets/doc/diplomacy/historical/second-treaty-of-santiago.pdf" }
+          },
+          {
+            title: "Doom Portal Accord",
+            summary: "Treaty which established Cortesian management of the Doom Portal.",
+            files: { pdf: "../assets/doc/diplomacy/historical/doom-portal-accord.pdf" }
+          },
+          {
+            title: "Treaty of Stonevale",
+            summary: "Treaty which incorporated the Temporal Empire into the management of the Doom Portal.",
+            files: { pdf: "../assets/doc/diplomacy/historical/treaty-of-stonevale.pdf" }
           }
         ]
       },
@@ -361,7 +371,7 @@ const ARCHIVE_DATA = [
         year: "2026",
         title: "Labor Notes Policy & Procedures",
         summary: "Treasury policy document establishing the Labor Notes system.",
-        files: { markdown: "../assets/doc/execpol/2026/labor-notes.pdf" }
+        files: { markdown: "../assets/doc/execpol/2026/labor-notes.md" }
       }
     ]
   }
