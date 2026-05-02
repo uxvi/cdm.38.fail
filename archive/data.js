@@ -73,6 +73,11 @@ const ARCHIVE_DATA = [
             title: "Treaty of Stonevale",
             summary: "Treaty which incorporated the Temporal Empire into the management of the Doom Portal.",
             files: { pdf: "../assets/doc/diplomacy/historical/treaty-of-stonevale.pdf" }
+          },
+          {
+            title: "CDM-UBS-Neo Sol Doom Portal Agreement",
+            summary: "Treaty which established firm borders for Cortesia's Doom Portal territory.",
+            files: { pdf: "../assets/doc/diplomacy/historical/doom-portal-agreement.pdf" }
           }
         ]
       },
