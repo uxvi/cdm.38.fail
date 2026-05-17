@@ -114,7 +114,7 @@ const ARCHIVE_DATA = [
             title: "CDM-Infrapontem Non-Aggression Pact",
             summary: "Treaty cementing terms of continued non-aggression between Cortesia Del Mar and Infrapontem.",
             files: { pdf: "../assets/doc/diplomacy/effective/cdm-infrapontem-non-aggression-pact.pdf" }
-          }
+          },
           {
             title: "CDM-Danzilona Security Agreement",
             summary: "Treaty cementing non-aggression and establishing anti-raider cooperation between Cortesia Del Mar and Danzilona.",
