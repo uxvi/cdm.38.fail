@@ -246,7 +246,7 @@ const ARCHIVE_DATA = [
         year: "2026",
         title: "Montefiore Capital Administration Act",
         summary: "Bill establishing the governance of the Cortesian capital city. Its annexes serve as bylaws.",
-        files: { pdf: "../assets/doc/laws/2026/montefiore-capital-administration-act.pdf" }
+        files: { pdf: "../assets/doc/laws/2026/montefiore-capital-administration-act.md" }
       }
     ]
   },
