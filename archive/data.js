@@ -115,6 +115,11 @@ const ARCHIVE_DATA = [
             summary: "Treaty cementing terms of continued non-aggression between Cortesia Del Mar and Infrapontem.",
             files: { pdf: "../assets/doc/diplomacy/effective/cdm-infrapontem-non-aggression-pact.pdf" }
           }
+          {
+            title: "CDM-Danzilona Security Agreement",
+            summary: "Treaty cementing non-aggression and establishing anti-raider cooperation between Cortesia Del Mar and Danzilona.",
+            files: { pdf: "../assets/doc/diplomacy/effective/cdm-danzilona-security-agreement.pdf" }
+          }
         ]
       }
     ]
@@ -236,6 +241,12 @@ const ARCHIVE_DATA = [
         title: "Property Title Act",
         summary: "Bill which provides rules and regulations for ownership and transfer of real property.",
         files: { pdf: "../assets/doc/laws/2026/property-title-act.pdf" }
+      },
+      {
+        year: "2026",
+        title: "Montefiore Capital Administration Act",
+        summary: "Bill establishing the governance of the Cortesian capital city. Its annexes serve as bylaws.",
+        files: { pdf: "../assets/doc/laws/2026/montefiore-capital-administration-act.pdf" }
       }
     ]
   },
